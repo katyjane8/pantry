@@ -16,6 +16,7 @@ class Pantry
 
   def add_to_shopping_list(food)
     @shopping_list = food.ingredients
+    require "pry"; binding.pry
   end
 
 end
