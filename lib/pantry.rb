@@ -16,7 +16,11 @@ class Pantry
 
   def add_to_shopping_list(food)
     @shopping_list = food.ingredients
-    require "pry"; binding.pry
   end
 
+  def shopping_list
+    @shopping_list.map do |shop|
+      shop[1]
+    end
+  end
 end
