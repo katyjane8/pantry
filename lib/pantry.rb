@@ -1,9 +1,9 @@
 class Pantry
-  attr_reader :stock, :shopping_list
+  attr_reader :stock
 
   def initialize
     @stock = Hash.new(0)
-    @shopping_list = {}
+    @shopping_list = []
   end
 
   def stock_check(ingredient)
@@ -15,12 +15,13 @@ class Pantry
   end
 
   def add_to_shopping_list(food)
-    @shopping_list = food.ingredients
+    @shopping_list << food.ingredients
   end
 
   def shopping_list
-    @shopping_list.map do |shop|
-      shop[1]
-    end
+    @shopping_list.reduce(Hash.new) do |result, list|
+      result.merge(list) {|k, v1, v2| v1 + v2}
+     end
   end
+
 end
