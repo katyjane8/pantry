@@ -1,3 +1,5 @@
+require "YAML"
+
 class Pantry
   attr_reader :stock
 
@@ -26,8 +28,7 @@ class Pantry
   end
 
   def print_shopping_list
-    list = shopping_list.to_a
-    list.each {|k, v| puts "*#{k}: #{v}"}
+    "*#{shopping_list.to_yaml}"
   end
 
   def add_to_cookbook(recipe)
@@ -35,17 +36,19 @@ class Pantry
   end
 
   def cookbook_recipe_ingredient_stock
-    @cookbook.map do |name|
-      name.ingredients.values
+    @cookbook.map do |recipe|
+      recipe.ingredients.values
     end
   end
 
   def stock_for_recipe
-    recipe.amount_required(cookbook_recipe_ingredient_stock)
-    require "pry"; binding.pry
+    @cookbook.map do |recipe|
+    recipe.amount_required(recipe)
+    end
   end
 
   def what_can_i_make
+    stock_for_recipe
   end
 
 end

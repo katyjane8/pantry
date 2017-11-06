@@ -83,7 +83,6 @@ class PantryTest < Minitest::Test
    end
 
    def test_shopping_list_can_be_printed
-     skip
      pantry = Pantry.new
      r1 = Recipe.new("Cheese Pizza")
      r1.add_ingredient("Flour", 20)
@@ -95,7 +94,7 @@ class PantryTest < Minitest::Test
      r2.add_ingredient("Marinara Sauce", 10)
      r2.add_ingredient("Cheese", 5)
      pantry.add_to_shopping_list(r2)
-     result = "* Cheese: 25\n* Flour: 20\n* Spaghetti Noodles: 10\n* Marinara Sauce: 10"
+     result = "*Flour: 20\n* Cheese: 25\n* Spaghetti Noodles: 10\n* Marinara Sauce: 10"
 
      assert_equal result, pantry.print_shopping_list
    end
@@ -161,7 +160,6 @@ class PantryTest < Minitest::Test
    end
 
    def test_make_something_from_food_i_have
-     skip
      pantry = Pantry.new
      r1 = Recipe.new("Cheese Pizza")
      r1.add_ingredient("Cheese", 20)
