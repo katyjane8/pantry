@@ -21,7 +21,12 @@ class Pantry
   def shopping_list
     @shopping_list.reduce(Hash.new) do |result, list|
       result.merge(list) {|k, v1, v2| v1 + v2}
-     end
+    end
+  end
+
+  def print_shopping_list
+    shopping_list.each do |k, v|
+    end
   end
 
 end

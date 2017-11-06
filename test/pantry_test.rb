@@ -46,11 +46,11 @@ class PantryTest < Minitest::Test
    def test_ingredients_can_be_added_to_shopping_list
      pantry = Pantry.new
      r = Recipe.new("Cheese Pizza")
-     r.add_ingredient("Flour", 20) # 500 "UNIVERSAL UNITS"
+     r.add_ingredient("Flour", 20)
      r.add_ingredient("Cheese", 20)
-     result = add_to_shopping_list(r)
+     result = pantry.add_to_shopping_list(r)
 
-     assert_equal [{"Flour"=>20, "Cheese"=>20}], pantry.result
+     assert_equal [{"Flour"=>20, "Cheese"=>20}], result
    end
 
    def test_shopping_list_returns_ingredients
@@ -79,6 +79,23 @@ class PantryTest < Minitest::Test
                "Marinara Sauce" => 10})
 
     assert_equal result, pantry.shopping_list
+   end
+
+   def test_shopping_list_can_be_printed
+     pantry = Pantry.new
+     r1 = Recipe.new("Cheese Pizza")
+     r1.add_ingredient("Flour", 20)
+     r1.add_ingredient("Cheese", 20)
+     pantry.add_to_shopping_list(r1)
+
+     r2 = Recipe.new("Spaghetti")
+     r2.add_ingredient("Spaghetti Noodles", 10)
+     r2.add_ingredient("Marinara Sauce", 10)
+     r2.add_ingredient("Cheese", 5)
+     pantry.add_to_shopping_list(r2)
+     result = "* Cheese: 25\n* Flour: 20\n* Spaghetti Noodles: 10\n* Marinara Sauce: 10"
+
+     assert_equal result, pantry.print_shopping_list
    end
 
 end
