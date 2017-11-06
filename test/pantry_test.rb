@@ -36,14 +36,33 @@ class PantryTest < Minitest::Test
      assert_equal 30, pantry.stock_check("Cheese")
    end
 
-   def test_add_ingredients_to_shopping_list
+   def test_shopping_list_returns_empty_hash_by_default
+     pantry = Pantry.new
+     r = Recipe.new("Cheese Pizza")
+
+     assert_equal ({}), pantry.shopping_list
+   end
+
+   def test_ingredients_can_be_added_to_shopping_list
      pantry = Pantry.new
      r = Recipe.new("Cheese Pizza")
      r.add_ingredient("Flour", 20) # 500 "UNIVERSAL UNITS"
      r.add_ingredient("Cheese", 20)
      pantry.add_to_shopping_list(r)
 
-     assert_equal ({"Cheese" => 20, "Flour" => 20) pantry.shoppinglist 
+     assert_equal ({"Cheese" => 20, "Flour" => 20}), pantry.add_to_shopping_list(r)
    end
+
+   def test_shopping_list_returns_ingredients
+     pantry = Pantry.new
+     r = Recipe.new("Cheese Pizza")
+     r.add_ingredient("Flour", 20) # 500 "UNIVERSAL UNITS"
+     r.add_ingredient("Cheese", 20)
+     pantry.add_to_shopping_list(r)
+
+     assert_equal ({"Cheese" => 20, "Flour" => 20}), pantry.shopping_list
+   end
+
+   
 
 end
