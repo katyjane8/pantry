@@ -82,6 +82,7 @@ class PantryTest < Minitest::Test
    end
 
    def test_shopping_list_can_be_printed
+     skip
      pantry = Pantry.new
      r1 = Recipe.new("Cheese Pizza")
      r1.add_ingredient("Flour", 20)

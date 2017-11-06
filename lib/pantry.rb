@@ -25,8 +25,9 @@ class Pantry
   end
 
   def print_shopping_list
-    shopping_list.each do |k, v|
-    end
+    list = shopping_list.to_a
+    list.each {|k, v| puts "*#{k}: #{v}"}
   end
+
 
 end
