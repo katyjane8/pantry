@@ -29,5 +29,14 @@ class Pantry
     list.each {|k, v| puts "*#{k}: #{v}"}
   end
 
+  def add_to_cookbook(recipe)
+    cookbook = []
+    cookbook << recipe
+  end
+
+  def what_can_i_make
+    shopping_list
+    require "pry"; binding.pry
+  end
 
 end
