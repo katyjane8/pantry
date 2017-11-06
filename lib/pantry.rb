@@ -34,11 +34,18 @@ class Pantry
     @cookbook << recipe
   end
 
-  def what_can_i_make
-    @cookbook.each do |recipe|
-      stock_check(recipe)
-      require "pry"; binding.pry
+  def cookbook_recipe_ingredient_stock
+    @cookbook.map do |name|
+      name.ingredients.values
     end
+  end
+
+  def stock_for_recipe
+    recipe.amount_required(cookbook_recipe_ingredient_stock)
+    require "pry"; binding.pry
+  end
+
+  def what_can_i_make
   end
 
 end

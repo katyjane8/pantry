@@ -1,4 +1,5 @@
 require './lib/pantry'
+require './lib/recipe'
 require 'minitest/autorun'
 require 'minitest/pride'
 
@@ -116,7 +117,51 @@ class PantryTest < Minitest::Test
      assert_equal "Peanuts", pantry.add_to_cookbook(r3).first.name
    end
 
+   def test_values_from_recipe_ingredients
+     pantry = Pantry.new
+     r1 = Recipe.new("Cheese Pizza")
+     r1.add_ingredient("Cheese", 20)
+     r1.add_ingredient("Flour", 20)
+
+     r2 = Recipe.new("Pickles")
+     r2.add_ingredient("Brine", 10)
+     r2.add_ingredient("Cucumbers", 30)
+
+     r3 = Recipe.new("Peanuts")
+     r3.add_ingredient("Raw nuts", 10)
+     r3.add_ingredient("Salt", 10)
+     pantry.add_to_cookbook(r1)
+     pantry.add_to_cookbook(r2)
+     pantry.add_to_cookbook(r3)
+
+     assert_equal [20, 20], pantry.cookbook_recipe_ingredient_stock.first
+   end
+
+   def test_stock_matches_my_inventory
+     pantry = Pantry.new
+     r1 = Recipe.new("Cheese Pizza")
+     r1.add_ingredient("Cheese", 20)
+     r1.add_ingredient("Flour", 20)
+
+     r2 = Recipe.new("Pickles")
+     r2.add_ingredient("Brine", 10)
+     r2.add_ingredient("Cucumbers", 30)
+
+     r3 = Recipe.new("Peanuts")
+     r3.add_ingredient("Raw nuts", 10)
+     r3.add_ingredient("Salt", 10)
+     pantry.add_to_cookbook(r1)
+     pantry.add_to_cookbook(r2)
+     pantry.add_to_cookbook(r3)
+
+     pantry.restock("Cheese", 10)
+     pantry.restock("Flour", 20)
+
+     assert_equal 20, pantry.stock_for_recipe
+   end
+
    def test_make_something_from_food_i_have
+     skip
      pantry = Pantry.new
      r1 = Recipe.new("Cheese Pizza")
      r1.add_ingredient("Cheese", 20)
