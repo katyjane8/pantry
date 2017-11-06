@@ -10,7 +10,7 @@ class Pantry
   end
 
   def restock(ingredient, pounds)
-    @stock[ingredient] = pounds
+    @stock[ingredient] += pounds
   end
 
 end
